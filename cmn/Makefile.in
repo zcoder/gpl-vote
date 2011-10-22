@@ -1,12 +1,12 @@
 .PHONY: all clean distclean mostyclean realclean
-OBJ:=main.o cfg.o
+OBJ:=pugixml.o
 
-all: ../sys.a
-../sys.a: ${OBJ}
-	ar r ../sys.a ${OBJ}
+all: ../cmn.a
+../cmn.a: ${OBJ}
+	ar r ../cmn.a ${OBJ}
 
 clean:
-	rm -f ../sys.a ${OBJ}
+	rm -f ../cmn.a ${OBJ}
 
 distclean: clean
 	rm -f Makefile

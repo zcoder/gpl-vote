@@ -5,7 +5,7 @@
 namespace sys
 {
 
-int run()
+int run(const pugi::xml_node& root) throw()
 {
 return EXIT_SUCCESS;
 }

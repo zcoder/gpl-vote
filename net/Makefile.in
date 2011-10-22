@@ -1,12 +1,12 @@
 .PHONY: all clean distclean mostyclean realclean
-OBJ:=test.o
+OBJ:=test.o cfg.o
 
-all: net.a
-net.a: ${OBJ}
-	ar r net.a ${OBJ}
+all: ../net.a
+../net.a: ${OBJ}
+	ar r ../net.a ${OBJ}
 
 clean:
-	rm -f net.a ${OBJ}
+	rm -f ../net.a ${OBJ}
 
 distclean: clean
 	rm -f Makefile

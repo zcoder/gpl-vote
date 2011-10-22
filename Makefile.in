@@ -6,6 +6,7 @@ all: gpl-vote
 clean:
 	make -C sys clean
 	make -C net clean
+	make -C cmn clean
 	rm -f gpl-vote ${OBJ}
 
 distclean: clean
@@ -14,12 +15,15 @@ distclean: clean
 mostlyclean: distclean
 realclean: distclean
 
-gpl-vote: ${OBJ} sys/sys.a net/net.a
+gpl-vote: ${OBJ} sys.a net.a cmn.a
 	${CXX} ${CXXFLAGS} ${LDFLAGS} ${LIBS} $? -o $@
 
-sys/sys.a: sys/*
+sys.a:
 	make -C sys
 
-net/net.a: net/*
+net.a: net/*
 	make -C net
+
+cmn.a: cmn/*
+	make -C cmn
 
