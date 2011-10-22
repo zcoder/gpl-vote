@@ -7,6 +7,7 @@ clean:
 	make -C sys clean
 	make -C net clean
 	make -C cmn clean
+	rm -f *.o
 	rm -f gpl-vote ${OBJ}
 
 distclean: clean
@@ -15,8 +16,11 @@ distclean: clean
 mostlyclean: distclean
 realclean: distclean
 
-gpl-vote: ${OBJ} sys.a net.a cmn.a
+gpl-vote: ${OBJ} sys.a net.a cmn.a version.o
 	${CXX} ${CXXFLAGS} ${LDFLAGS} ${LIBS} $? -o $@
+
+version.o: version.cpp info.sh
+	$(CXX) $(CXXFLAGS) -D__INFO__="\"`sh info.sh -n`\"" -c -o $@ $<
 
 sys.a:
 	make -C sys
