@@ -1,0 +1,16 @@
+.PHONY: all clean distclean mostyclean realclean
+OBJ:=main.o
+
+all: sys.a
+sys.a: ${OBJ}
+	ar r sys.a ${OBJ}
+
+clean:
+	rm -f sys.a ${OBJ}
+
+distclean: clean
+	rm -f Makefile
+
+mostlyclean: distclean
+realclean: distclean
+

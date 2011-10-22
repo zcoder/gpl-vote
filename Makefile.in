@@ -1,0 +1,25 @@
+.PHONY: all clean distclean mostyclean realclean
+VPATH=sys:net
+OBJ:=unix_main.o
+
+all: gpl-vote
+clean:
+	make -C sys clean
+	make -C net clean
+	rm -f gpl-vote ${OBJ}
+
+distclean: clean
+	rm -f Makefile confdefs.h config.h config.log config.status
+	rm -rf autom4te.cache/
+mostlyclean: distclean
+realclean: distclean
+
+gpl-vote: ${OBJ} sys/sys.a net/net.a
+	${CXX} ${CXXFLAGS} ${LDFLAGS} ${LIBS} $? -o $@
+
+sys/sys.a: sys/*
+	make -C sys
+
+net/net.a: net/*
+	make -C net
+
