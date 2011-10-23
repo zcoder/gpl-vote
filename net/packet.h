@@ -47,9 +47,8 @@ using header::get_header;
 using header::get_proto;
 using header::get_size;
 
-typedef fixed_size<T>   base;
-
 inline                  fixed_size(const proto::enum_proto p) throw();
+inline                  fixed_size(const proto::enum_proto p, const T& origin) throw();
 inline  const void*     get_data() const throw();
 inline  const void*     get_all() const throw();
 };
@@ -89,10 +88,16 @@ fixed_size<T>::fixed_size(proto::enum_proto p) throw():
 }
 
 template <class T>
+fixed_size<T>::fixed_size(proto::enum_proto p, const T& origin) throw():
+    header( p, sizeof(header) + sizeof(T) ), T( origin )
+{
+}
+
+template <class T>
 const void* fixed_size<T>::get_data() const throw()
 {
-T* userdata = this;
-return userdata;
+T* data = this;
+return data;
 }
 
 template <class T>
