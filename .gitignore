@@ -1,6 +1,9 @@
+gpl-vote
 Makefile
 confdefs.h
 config.h
 config.log
 config.status
 autom4te.cache/*
+*.a
+*.o

@@ -9,13 +9,22 @@ namespace net
 {
 namespace packet
 {
-
+//           packet
+//--------------------------------
+//|   0 1   |   2 3  | size - 2  |
+//|get_proto|get_size|           |
+//--------------------------------
+//|    get_header    | get_data  |
+//--------------------------------
+//|            get_all           |
+//--------------------------------
 #pragma pack(push)
 #pragma pack(1)
 class header
 {
-const uint16_t  m_proto;
-uint16_t        m_size;
+protected:
+const uint16_t          m_proto;
+uint16_t                m_size;
 
 public:
 inline                  header(const proto::enum_proto p) throw();
@@ -34,14 +43,15 @@ class fixed_size:
     public T
 {
 public:
-typedef fixed_size<T>   base;
 using header::get_header;
 using header::get_proto;
 using header::get_size;
 
-inline              fixed_size(const proto::enum_proto p) throw();
-inline  T*          get_data() throw();
-inline  const T*    get_data() const throw();
+typedef fixed_size<T>   base;
+
+inline                  fixed_size(const proto::enum_proto p) throw();
+inline  const void*     get_data() const throw();
+inline  const void*     get_all() const throw();
 };
 #pragma pack(pop)
 
@@ -79,13 +89,14 @@ fixed_size<T>::fixed_size(proto::enum_proto p) throw():
 }
 
 template <class T>
-T* fixed_size<T>::get_data() throw()
+const void* fixed_size<T>::get_data() const throw()
 {
-return this;
+T* userdata = this;
+return userdata;
 }
 
 template <class T>
-const T* fixed_size<T>::get_data() const throw()
+const void* fixed_size<T>::get_all() const throw()
 {
 return this;
 }
