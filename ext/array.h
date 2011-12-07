@@ -4,6 +4,9 @@
 #include <stddef.h>
 #include <iterator>
 
+namespace ext
+{
+
 template <class T,size_t n>
 struct array
 {
@@ -112,6 +115,8 @@ return false;
 }
 
 };
+
+} //namespace ext
 
 #endif
 
