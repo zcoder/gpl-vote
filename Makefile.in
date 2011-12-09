@@ -20,7 +20,7 @@ gpl-vote: ${OBJ} sys.a net.a cmn.a version.o
 	${CXX} ${CXXFLAGS} ${LDFLAGS} ${LIBS} $? -o $@
 
 version.o: version.cpp info.sh
-	$(CXX) $(CXXFLAGS) -D__INFO__="\"`sh info.sh -n`\"" -c -o $@ $<
+	${CXX} ${CXXFLAGS} -D__INFO__="\"`sh info.sh -n`\"" -c -o $@ $<
 
 sys.a:
 	make -C sys
