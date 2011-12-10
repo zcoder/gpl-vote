@@ -72,6 +72,11 @@ const_reverse_iterator  rend()  const
 return const_reverse_iterator( begin() );
 }
 
+size_t                  size() const
+{
+return n;
+}
+
 void                    fill(const_reference value)
 {
 for (iterator it = begin(); it != end(); ++it)
