@@ -86,6 +86,13 @@ while ( true )
         }
     }
 
+while (optind < argc)
+{
+    opt_config_name = 1;
+    config_name = argv[optind++];
+}        
+
+
 if (opt_help)  
 {
     help( std::cout, argc, argv, opt_version | opt_demonize | opt_config_name );
